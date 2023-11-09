@@ -12,6 +12,7 @@ public interface IDetalleService {
     List<Detalle> list();
     void delete(int idDetalle);
 
+    public Detalle listarId(int idDetalle);
 
 
 

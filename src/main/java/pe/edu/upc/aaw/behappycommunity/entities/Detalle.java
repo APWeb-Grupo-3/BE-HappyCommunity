@@ -11,7 +11,7 @@ public class Detalle {
     private int idDetalle;
 
     @Column(name="subtotalDetalle", nullable = false)
-    private String subtotalDetalle;
+    private double subtotalDetalle;
 
     @ManyToOne
     @JoinColumn(name ="idDocumentoPago")
@@ -34,11 +34,11 @@ public class Detalle {
         this.idDetalle = idDetalle;
     }
 
-    public String getSubtotalDetalle() {
+    public double getSubtotalDetalle() {
         return subtotalDetalle;
     }
 
-    public void setSubtotalDetalle(String subtotalDetalle) {
+    public void setSubtotalDetalle(double subtotalDetalle) {
         this.subtotalDetalle = subtotalDetalle;
     }
 

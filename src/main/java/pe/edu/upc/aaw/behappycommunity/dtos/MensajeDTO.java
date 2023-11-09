@@ -1,11 +1,13 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
+import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
+
 public class MensajeDTO {
 
     private int idMensaje;
     private String titulo;
     private String descripcion;
-    private UsuarioDTO usuario;
+    private Usuario usuario;
     private int idReceptor;
 
     public int getIdReceptor() {
@@ -40,11 +42,11 @@ public class MensajeDTO {
         this.descripcion = descripcion;
     }
 
-    public UsuarioDTO getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }

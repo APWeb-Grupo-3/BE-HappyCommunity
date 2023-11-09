@@ -44,4 +44,11 @@ public class TipoDocPagoController {
         TipoDocPago t=m.map(dto,TipoDocPago.class);
         tS.insert(t);
     }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @GetMapping("/{id}")
+    public TipoDocPagoDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        TipoDocPagoDTO dto=m.map(tS.listarId(id),TipoDocPagoDTO.class);
+        return dto;
+    }
 }

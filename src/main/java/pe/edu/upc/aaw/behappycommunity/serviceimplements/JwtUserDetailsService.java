@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.aaw.behappycommunity.entities.RolUsuario;
 import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 import pe.edu.upc.aaw.behappycommunity.repositories.IUsuarioRepository;
 
@@ -27,9 +28,16 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         List<GrantedAuthority> roles = new ArrayList<>();
 
-        user.getRoles().forEach(rol -> {
+        RolUsuario rol=user.getRol();
+
+        roles.add(new SimpleGrantedAuthority(rol.getRol()));
+
+        /*
+        user.getRol().forEach(rol -> {
             roles.add(new SimpleGrantedAuthority(rol.getRol()));
         });
+
+         */
 
         UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getClave(), user.getHabilitado(), true, true, true, roles);
 

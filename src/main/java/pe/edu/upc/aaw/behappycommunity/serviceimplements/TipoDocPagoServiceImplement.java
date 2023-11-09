@@ -27,4 +27,9 @@ public class TipoDocPagoServiceImplement implements ITipoDocPagoService {
     public void delete(int idTipoDocPago) {
         tR.deleteById(idTipoDocPago);
     }
+    @Override
+    public TipoDocPago listarId(int idTipoDocPago) {
+        return tR.findById(idTipoDocPago).orElse(new TipoDocPago());
+    }
+
 }

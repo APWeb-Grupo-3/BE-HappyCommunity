@@ -31,9 +31,9 @@ public class ServicioServiceImplement implements IServicioService {
         serR.deleteById(idTipoServicio);
     }
 
-
-
-
-
+    @Override
+    public Servicio listarId(int idServicio) {
+        return serR.findById(idServicio).orElse(new Servicio());
+    }
 
 }

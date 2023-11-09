@@ -8,4 +8,6 @@ public interface ITipoDocPagoService {
     public void insert(TipoDocPago tipoDocPago);
     public List<TipoDocPago>list();
     public void delete(int idTipoDocPago);
+    public TipoDocPago listarId(int idTipoDocPago);
+
 }

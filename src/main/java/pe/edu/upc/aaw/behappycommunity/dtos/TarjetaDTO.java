@@ -1,5 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
+import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
+
 import java.time.LocalDate;
 
 public class TarjetaDTO {
@@ -8,14 +10,14 @@ public class TarjetaDTO {
     private Long numeroTarjeta;
     private LocalDate fechaVencimiento;
     private int codigoSeguridad;
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
 
-    public UsuarioDTO getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 import pe.edu.upc.aaw.behappycommunity.entities.Condominio;
+import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 
 import java.time.LocalDate;
 
@@ -9,7 +10,7 @@ public class AvisoDTO {
     private int idAviso;
     private String titulo;
     private String descripcion;
-    private UsuarioDTO usuario;
+    private Usuario usuario;
     private Condominio condominio;
     private LocalDate fechaPublicacion;
     public int getIdAviso() {
@@ -36,11 +37,11 @@ public class AvisoDTO {
         this.descripcion = descripcion;
     }
 
-    public UsuarioDTO getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

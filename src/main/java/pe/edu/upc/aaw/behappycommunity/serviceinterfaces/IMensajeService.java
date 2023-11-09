@@ -9,4 +9,6 @@ public interface IMensajeService {
     public void insert(Mensaje mensaje);
     public List<Mensaje> list();
     public void delete(int idMensaje);
+    public Mensaje listarId(int idMensaje);
+
 }

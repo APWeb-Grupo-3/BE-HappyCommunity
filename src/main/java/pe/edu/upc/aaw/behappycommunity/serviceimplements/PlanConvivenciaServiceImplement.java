@@ -23,6 +23,12 @@ public class PlanConvivenciaServiceImplement implements IPlanConvivenciaService 
     }
 
     @Override
+    public void delete(int idPlanConvivencia) {
+        pR.deleteById(idPlanConvivencia);
+    }
+
+
+    @Override
     public PlanConvivencia listarId(int IdPlanConvivencia) {
         return pR.findById(IdPlanConvivencia).orElse(new PlanConvivencia());
     }

@@ -45,4 +45,10 @@ public class TarjetaController {
         Tarjeta t = m.map(dto, Tarjeta.class);
         tS.insert(t);
     }
+    @GetMapping("/{id}")
+    public TarjetaDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        TarjetaDTO dto=m.map(tS.listarId(id),TarjetaDTO.class);
+        return dto;
+    }
 }

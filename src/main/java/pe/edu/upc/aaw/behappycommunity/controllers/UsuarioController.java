@@ -4,10 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.aaw.behappycommunity.dtos.Reporte1DTO;
+import pe.edu.upc.aaw.behappycommunity.dtos.Reporte3DTO;
 import pe.edu.upc.aaw.behappycommunity.dtos.UsuarioDTO;
 import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.IUsuarioService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +46,14 @@ public class UsuarioController {
         Usuario u=m.map(dto,Usuario.class);
         uS.insert(u);
     }
-    /*
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
+    @GetMapping("/{id}")
+    public UsuarioDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        UsuarioDTO dto=m.map(uS.listarId(id),UsuarioDTO.class);
+        return dto;
+    }
+
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @GetMapping("/reporte1")
     public List<Reporte1DTO>visualizarVecinosPagosAlDia(){
@@ -73,5 +83,5 @@ public class UsuarioController {
         return listaDTO;
     }
 
-     */
+
 }

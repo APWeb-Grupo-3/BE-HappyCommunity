@@ -27,4 +27,9 @@ public class MensajeServiceImplement implements IMensajeService {
     public void delete(int idMensaje) {
         mR.deleteById(idMensaje);
     }
+    @Override
+    public Mensaje listarId(int idMensaje) {
+        return mR.findById(idMensaje).orElse(new Mensaje());
+    }
+
 }

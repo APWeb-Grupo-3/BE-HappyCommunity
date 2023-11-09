@@ -7,6 +7,7 @@ import java.util.List;
 public interface IPlanConvivenciaService {
     public void insert(PlanConvivencia planConvivencia);
     public List<PlanConvivencia> list();
+    public void delete(int idPlanConvivencia);
 
     public PlanConvivencia listarId(int IdPlanConvivencia);
 }

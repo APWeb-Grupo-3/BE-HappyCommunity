@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 
+import pe.edu.upc.aaw.behappycommunity.entities.DocumentoPago;
 import pe.edu.upc.aaw.behappycommunity.entities.Servicio;
 
 public class DetalleDTO {
@@ -8,9 +9,17 @@ public class DetalleDTO {
 
     private int idDetalle;
 
-    private String subtotalDetalle;
+    private double subtotalDetalle;
 
-    private DocumentoPagoDTO documentoPago;
+    private DocumentoPago documentoPago;
+
+    public DocumentoPago getDocumentoPago() {
+        return documentoPago;
+    }
+
+    public void setDocumentoPago(DocumentoPago documentoPago) {
+        this.documentoPago = documentoPago;
+    }
 
     private Servicio servicio;
 
@@ -22,20 +31,12 @@ public class DetalleDTO {
         this.idDetalle = idDetalle;
     }
 
-    public String getSubtotalDetalle() {
+    public double getSubtotalDetalle() {
         return subtotalDetalle;
     }
 
-    public void setSubtotalDetalle(String subtotalDetalle) {
+    public void setSubtotalDetalle(double subtotalDetalle) {
         this.subtotalDetalle = subtotalDetalle;
-    }
-
-    public DocumentoPagoDTO getDocumentoPago() {
-        return documentoPago;
-    }
-
-    public void setDocumentoPago(DocumentoPagoDTO documentoPago) {
-        this.documentoPago = documentoPago;
     }
 
     public Servicio getServicio() {

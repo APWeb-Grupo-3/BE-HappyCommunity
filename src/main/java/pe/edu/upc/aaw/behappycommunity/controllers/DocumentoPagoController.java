@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/documentodepago")
+@RequestMapping("/documentodepagos")
 public class DocumentoPagoController {
     @Autowired
     private IDocumentoPagoService dS;
@@ -61,4 +61,5 @@ public class DocumentoPagoController {
         DocumentoPagoDTO dto=m.map(dS.listarId(id),DocumentoPagoDTO.class);
         return dto;
     }
+
 }
