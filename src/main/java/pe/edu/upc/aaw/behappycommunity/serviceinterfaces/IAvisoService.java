@@ -10,4 +10,6 @@ public interface IAvisoService {
     public List<Aviso> list();
     public void delete(int idAviso);
     public List<String[]> quantityAnnouncementPerMonth();
+    public Aviso listarId(int idAviso);
+
 }

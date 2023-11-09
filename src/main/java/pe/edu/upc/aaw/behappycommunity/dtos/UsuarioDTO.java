@@ -1,5 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
+import pe.edu.upc.aaw.behappycommunity.entities.RolUsuario;
+
 public class UsuarioDTO {
     private Long idUsuario;
     private String nombreUsuario;
@@ -11,6 +13,15 @@ public class UsuarioDTO {
     private int edad;
     private Long telefono;
     private String genero;
+    private RolUsuario rol;
+
+    public RolUsuario getRol() {
+        return rol;
+    }
+
+    public void setRol(RolUsuario rol) {
+        this.rol = rol;
+    }
 
     public Long getIdUsuario() {
         return idUsuario;

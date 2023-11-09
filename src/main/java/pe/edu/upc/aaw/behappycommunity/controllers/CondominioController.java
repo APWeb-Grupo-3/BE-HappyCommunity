@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/condominio")
+@RequestMapping("/condominios")
 public class CondominioController {
 
     @Autowired
@@ -51,7 +51,6 @@ public class CondominioController {
         dS.insert(d);
     }
     @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO')")
-
     @GetMapping("/{id}")
     public CondominioDTO listarId(@PathVariable("id") Integer id) {
         ModelMapper m=new ModelMapper();

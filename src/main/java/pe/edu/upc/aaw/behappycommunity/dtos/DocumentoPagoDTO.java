@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 import pe.edu.upc.aaw.behappycommunity.entities.TipoDocPago;
+import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ public class DocumentoPagoDTO {
     private double total;
     private String estado;
     //Foreign keys
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
     private TipoDocPago tipoDocPago;
 
@@ -75,11 +76,11 @@ public class DocumentoPagoDTO {
         this.estado = estado;
     }
 
-    public UsuarioDTO getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

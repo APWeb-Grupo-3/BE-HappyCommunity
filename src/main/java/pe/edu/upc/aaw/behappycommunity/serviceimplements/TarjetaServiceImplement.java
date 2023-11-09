@@ -27,4 +27,9 @@ public class TarjetaServiceImplement implements ITarjetaService {
     public void delete(int idTarjeta) {
         tR.deleteById(idTarjeta);
     }
+    @Override
+    public Tarjeta listarId(int idTarjeta) {
+        return tR.findById(idTarjeta).orElse(new Tarjeta());
+    }
+
 }

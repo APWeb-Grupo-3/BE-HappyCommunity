@@ -31,13 +31,9 @@ public class DetalleServiceInterface implements IDetalleService {
         detR.deleteById(idDetalle);
     }
 
-
-
-
-
-
-
-
-
+    @Override
+    public Detalle listarId(int idDetalle) {
+        return detR.findById(idDetalle).orElse( new Detalle());
+    }
 
 }

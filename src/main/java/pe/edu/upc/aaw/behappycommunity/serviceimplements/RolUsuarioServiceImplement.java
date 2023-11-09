@@ -26,5 +26,8 @@ public class RolUsuarioServiceImplement implements IRolUsuarioService {
     public void delete(Long idRolUsuario) {
         ruR.deleteById(idRolUsuario);
     }
-
+    @Override
+    public RolUsuario listarId(long idRolUsuario) {
+        return ruR.findById(idRolUsuario).orElse(new RolUsuario());
+    }
 }

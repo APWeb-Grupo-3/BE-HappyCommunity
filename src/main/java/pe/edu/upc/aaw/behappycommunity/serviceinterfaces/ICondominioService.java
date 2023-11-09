@@ -9,8 +9,6 @@ public interface ICondominioService {
     public void insert(Condominio condominio);
     public List<Condominio> list();
     public void delete(int idCondominio);
-
-
     public Condominio listarId(int IdCondominio);
 
 }

@@ -16,9 +16,9 @@ public class Usuario implements Serializable {
     private String clave;
     private Boolean habilitado;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-    private List<RolUsuario> roles;
+    @ManyToOne
+    @JoinColumn(name = "idRolUsuario",nullable = false)
+    private RolUsuario rol;
 
     @Column(name = "nombres",length = 100,nullable = false)
     private String nombres;
@@ -36,18 +36,26 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nombreUsuario, String clave, Boolean habilitado, List<RolUsuario> roles, String nombres, String apellidos, String correo, int edad, Long telefono, String genero) {
+    public Usuario(Long idUsuario, String nombreUsuario, String clave, Boolean habilitado, RolUsuario rol, String nombres, String apellidos, String correo, int edad, Long telefono, String genero) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.habilitado = habilitado;
-        this.roles = roles;
+        this.rol = rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
         this.edad = edad;
         this.telefono = telefono;
         this.genero = genero;
+    }
+
+    public RolUsuario getRol() {
+        return rol;
+    }
+
+    public void setRol(RolUsuario rol) {
+        this.rol = rol;
     }
 
     public Long getIdUsuario() {
@@ -82,13 +90,7 @@ public class Usuario implements Serializable {
         this.habilitado = habilitado;
     }
 
-    public List<RolUsuario> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(List<RolUsuario> roles) {
-        this.roles = roles;
-    }
 
 
 

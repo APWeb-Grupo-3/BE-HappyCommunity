@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 import pe.edu.upc.aaw.behappycommunity.entities.Condominio;
+import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 
 
 public class SolicitudAccesoDTO {
@@ -8,7 +9,7 @@ public class SolicitudAccesoDTO {
     private int idSolicitudAcceso;
     private String estado;
     private Condominio condominio;
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
     public int getIdSolicitudAcceso() {
         return idSolicitudAcceso;
@@ -34,11 +35,11 @@ public class SolicitudAccesoDTO {
         this.condominio = condominio;
     }
 
-    public UsuarioDTO getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "RolUsuario",uniqueConstraints = { @UniqueConstraint(columnNames = { "usuario_id", "rol" }) })
+@Table(name = "RolUsuario")
 public class RolUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -14,9 +14,6 @@ public class RolUsuario implements Serializable {
 
     @Column(name = "rol",length = 150,nullable = false)
     private String rol;
-    @ManyToOne
-    @JoinColumn(name="usuario_id",nullable = false)
-    private Usuario usuario;
 
     public RolUsuario() {
     }
@@ -24,7 +21,6 @@ public class RolUsuario implements Serializable {
     public RolUsuario(Long idRolUsuario, String rol, Usuario usuario) {
         this.idRolUsuario = idRolUsuario;
         this.rol = rol;
-        this.usuario = usuario;
     }
 
     public Long getIdRolUsuario() {
@@ -43,11 +39,4 @@ public class RolUsuario implements Serializable {
         this.rol = rol;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

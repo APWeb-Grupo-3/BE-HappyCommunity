@@ -28,9 +28,10 @@ public class TipoServicioServiceImplement implements ITipoServicioService {
     public void delete(int idTipoServicio) {
         tsR.deleteById(idTipoServicio);
     }
-
-
-
+    @Override
+    public TipoServicio listarId(int idTipoServicio) {
+        return tsR.findById(idTipoServicio).orElse(new TipoServicio());
+    }
 
 
 }

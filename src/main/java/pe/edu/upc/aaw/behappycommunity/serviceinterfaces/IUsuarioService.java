@@ -8,6 +8,8 @@ public interface IUsuarioService {
     public void insert(Usuario usuario);
     public List<Usuario>list();
     public void delete(Long idUsuario);
+    public Usuario listarId(long idUsuario);
+
 
     public List<String[]>findVecinosWithoutDebt();
 

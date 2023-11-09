@@ -46,5 +46,11 @@ public class DetalleController {
         Detalle t = m.map(dto, Detalle.class);
         detR.insert(t);
     }
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @GetMapping("/{id}")
+    public DetalleDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        DetalleDTO dto=m.map(detR.listarId(id),DetalleDTO.class);
+        return dto;
+    }
 }

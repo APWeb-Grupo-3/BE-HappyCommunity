@@ -11,6 +11,7 @@ public interface ITipoServicioService {
     void insert(TipoServicio tipoServicio );
     List<TipoServicio> list();
     void delete(int idTipoServicio);
+    public TipoServicio listarId(int idTipoServicio);
 
 
 

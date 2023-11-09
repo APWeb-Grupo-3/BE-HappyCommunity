@@ -46,11 +46,12 @@ public class ServicioController {
         Servicio t = m.map(dto, Servicio.class);
         serR.insert(t);
     }
-
-
-
-
-
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @GetMapping("/{id}")
+    public ServicioDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        ServicioDTO dto=m.map(serR.listarId(id),ServicioDTO.class);
+        return dto;
+    }
 
 }

@@ -49,4 +49,5 @@ public class PlanConvivenciaController {
         PlanConvivenciaDTO dto=m.map(pS.listarId(id),PlanConvivenciaDTO.class);
         return dto;
     }
+
 }

@@ -45,6 +45,13 @@ public class TipoServicioController {
         TipoServicio t=m.map(dto,TipoServicio.class);
         tsS.insert(t);
     }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @GetMapping("/{id}")
+    public TipoServicioDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        TipoServicioDTO dto=m.map(tsS.listarId(id),TipoServicioDTO.class);
+        return dto;
+    }
 
 
 

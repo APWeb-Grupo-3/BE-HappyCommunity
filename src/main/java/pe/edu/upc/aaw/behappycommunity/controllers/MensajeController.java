@@ -34,23 +34,26 @@ public class MensajeController {
 
         }).collect(Collectors.toList());
     }
-
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
     @DeleteMapping("/{id}")
     public  void  eliminar(@PathVariable("id")Integer id){
         mS.delete(id);
     }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
     @PutMapping
     public void modificar(@RequestBody MensajeDTO dto) {
         ModelMapper m = new ModelMapper();
         Mensaje e = m.map(dto, Mensaje.class);
         mS.insert(e);
     }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
 
-
-
-
-
-
+    @GetMapping("/{id}")
+    public MensajeDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        MensajeDTO dto=m.map(mS.listarId(id),MensajeDTO.class);
+        return dto;
+    }
 
 
 }

@@ -37,4 +37,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return uR.findVecinosWithDebt();
     }
 
+    @Override
+    public Usuario listarId(long idUsuario) {
+        return uR.findById(idUsuario).orElse(new Usuario());
+    }
+
 }

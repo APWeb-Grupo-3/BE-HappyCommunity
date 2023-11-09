@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class RolUsuarioController {
     @Autowired
     private IRolUsuarioService ruS;
-    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
     @PostMapping
     public void registrar(@RequestBody RolUsuarioDTO dto){
         ModelMapper m=new ModelMapper();
@@ -42,5 +41,12 @@ public class RolUsuarioController {
         ModelMapper m=new ModelMapper();
         RolUsuario tu=m.map(dto, RolUsuario.class);
         ruS.insert(tu);
+    }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
+    @GetMapping("/{id}")
+    public RolUsuarioDTO listarId(@PathVariable("id") Integer id) {
+        ModelMapper m=new ModelMapper();
+        RolUsuarioDTO dto=m.map(ruS.listarId(id),RolUsuarioDTO.class);
+        return dto;
     }
 }
