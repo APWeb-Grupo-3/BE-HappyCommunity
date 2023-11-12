@@ -17,7 +17,6 @@ public class CondominioController {
 
     @Autowired
     private ICondominioService dS;
-
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     @PostMapping
     public void registrar(@RequestBody CondominioDTO dto){
