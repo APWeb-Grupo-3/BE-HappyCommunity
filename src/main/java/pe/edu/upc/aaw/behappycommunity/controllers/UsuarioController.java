@@ -2,12 +2,19 @@ package pe.edu.upc.aaw.behappycommunity.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.behappycommunity.dtos.Reporte1DTO;
 import pe.edu.upc.aaw.behappycommunity.dtos.Reporte3DTO;
 import pe.edu.upc.aaw.behappycommunity.dtos.UsuarioDTO;
 import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
+import pe.edu.upc.aaw.behappycommunity.security.JwtRequest;
+import pe.edu.upc.aaw.behappycommunity.security.JwtResponse;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.IUsuarioService;
 
 import java.util.ArrayList;
@@ -19,13 +26,23 @@ import java.util.stream.Collectors;
 public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
-    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
-    @PostMapping
-    public void registrar(@RequestBody UsuarioDTO dto){
-        ModelMapper m=new ModelMapper();
-        Usuario u=m.map(dto,Usuario.class);
-        uS.insert(u);
+    @PostMapping("/register")
+    public ResponseEntity<?> registrar(@RequestBody UsuarioDTO dto){
+        try {
+            ModelMapper m = new ModelMapper();
+            Usuario u = m.map(dto, Usuario.class);
+
+            String claveEncriptada = BCrypt.hashpw(u.getClave(), BCrypt.gensalt(10));
+
+            u.setClave(claveEncriptada);
+
+            uS.insert(u);
+            return ResponseEntity.ok("Usuario registrado exitosamente");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar al usuario: " + ex.getMessage());
+        }
     }
+
     @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
     @GetMapping
     public List<UsuarioDTO>listar(){

@@ -22,8 +22,7 @@ public class RolUsuarioController {
         RolUsuario tu=m.map(dto, RolUsuario.class);
         ruS.insert(tu);
     }
-    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
-    @GetMapping
+    @GetMapping("/getroles")
     public List<RolUsuarioDTO>listar(){
         return ruS.list().stream().map(x->{
                 ModelMapper m=new ModelMapper();
