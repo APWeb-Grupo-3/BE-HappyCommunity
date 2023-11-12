@@ -49,5 +49,10 @@ public class PlanConvivenciaController {
         PlanConvivenciaDTO dto=m.map(pS.listarId(id),PlanConvivenciaDTO.class);
         return dto;
     }
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @DeleteMapping("/{id}")
+    public  void  eliminar(@PathVariable("id")Integer id){
+        pS.delete(id);
+    }
 
 }
