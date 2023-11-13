@@ -60,7 +60,7 @@ public class AvisoController {
         }
         return listaDTO;
     }
-    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')or hasAuthority('VECINO')")
     @GetMapping("/{id}")
     public AvisoDTO listarId(@PathVariable("id") Integer id) {
         ModelMapper m=new ModelMapper();
