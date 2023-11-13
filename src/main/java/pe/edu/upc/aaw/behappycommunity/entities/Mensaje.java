@@ -17,35 +17,19 @@ public class Mensaje {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
     @Column(name="idReceptor",nullable = false)
-    private int idReceptor;
+    private String receptor;
 
-
-
-    public Mensaje(int idMensaje, String titulo, String descripcion, Usuario usuario, int idReceptor) {
+    public Mensaje(int idMensaje, String titulo, String descripcion, Usuario usuario, String receptor) {
         this.idMensaje = idMensaje;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.usuario = usuario;
-        this.idReceptor = idReceptor;
+        this.receptor = receptor;
     }
+
     public Mensaje() {
-    }
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
-
-    public int getIdReceptor() {
-        return idReceptor;
-    }
-
-    public void setIdReceptor(int idReceptor) {
-        this.idReceptor = idReceptor;
-    }
-
 
     public int getIdMensaje() {
         return idMensaje;
@@ -71,5 +55,19 @@ public class Mensaje {
         this.descripcion = descripcion;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(String receptor) {
+        this.receptor = receptor;
+    }
 }
