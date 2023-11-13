@@ -26,7 +26,7 @@ public class CondominioController {
     }
    // @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
 
-    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO')")
     @GetMapping
     public List<CondominioDTO> listar(){
         return dS.list().stream().map(x->{
