@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.behappycommunity.dtos.DocumentoPagoDTO;
+import pe.edu.upc.aaw.behappycommunity.dtos.MesDeudaReDTO;
+import pe.edu.upc.aaw.behappycommunity.dtos.Reporte1DTO;
 import pe.edu.upc.aaw.behappycommunity.entities.DocumentoPago;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.IDocumentoPagoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,19 +50,40 @@ public class DocumentoPagoController {
     }
 
     //HU44	Visualizar el mes con mayor deuda
-    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/MesMayorDeuda")
-    public List<Object[]> MesMayorDeuda(){return dS.MesMayorDeuda();}
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/DeudaMes")
-    public List<Object[]> DeudaMes(){return dS.DeudaMes();}
+    @GetMapping("/MesMayorDeuda")
+    public List<MesDeudaReDTO>MesMayorDeuda(){
+        List<Object[]>lista=dS.MesMayorDeuda();
+        List<MesDeudaReDTO>listaDTO=new ArrayList<>();
+        for(Object[] data:lista){
+            MesDeudaReDTO dto=new MesDeudaReDTO();
+            dto.setMes(String.valueOf(data[0]));
+            dto.setTotal((Double) data[1]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
     @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO')")
     @GetMapping("/{id}")
     public DocumentoPagoDTO listarId(@PathVariable("id") Integer id) {
         ModelMapper m=new ModelMapper();
         DocumentoPagoDTO dto=m.map(dS.listarId(id),DocumentoPagoDTO.class);
         return dto;
+    }
+
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @GetMapping("/MesDeuda")
+    public List<MesDeudaReDTO>DeudaMes(){
+        List<Object[]>lista=dS.DeudaMes();
+        List<MesDeudaReDTO>listaDTO=new ArrayList<>();
+        for(Object[] data:lista){
+            MesDeudaReDTO dto=new MesDeudaReDTO();
+            dto.setMes(String.valueOf(data[0]));
+            dto.setTotal((Double) data[1]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 
 }
