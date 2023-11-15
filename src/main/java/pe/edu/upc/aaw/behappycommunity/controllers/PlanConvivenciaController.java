@@ -25,7 +25,7 @@ public class PlanConvivenciaController {
         pS.insert(u);
     }
 
-    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR' ) or hasAuthority('VECINO')")
     @GetMapping
     public List<PlanConvivenciaDTO> listar(){
         return pS.list().stream().map(x->{
