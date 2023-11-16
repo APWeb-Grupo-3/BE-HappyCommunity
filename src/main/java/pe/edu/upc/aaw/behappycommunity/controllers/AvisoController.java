@@ -47,15 +47,15 @@ public class AvisoController {
         aS.insert(a);
     }
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/reporte2")
-    public List<Reporte2DTO>VisualizarCantidadAvisosPorMes(){
-        List<String[]>lista=aS.quantityAnnouncementPerMonth();
+    @GetMapping("/reporte2/{anio}")
+    public List<Reporte2DTO>VisualizarCantidadAvisosPorMes(@PathVariable("anio") int anio){
+        List<String[]>lista=aS.quantityAnnouncementPerMonth(anio);
         List<Reporte2DTO>listaDTO= new ArrayList<>();
         for(String[] data:lista){
             Reporte2DTO dto=new Reporte2DTO();
-            dto.setAnio(Integer.parseInt(data[0]));
-            dto.setMes(data[1]);
-            dto.setCantidad_de_avisos(Integer.parseInt(data[2]));
+            //dto.setAnio(Integer.parseInt(data[0]));
+            dto.setMes(data[0]);
+            dto.setCantidad_de_avisos(Integer.parseInt(data[1]));
             listaDTO.add(dto);
         }
         return listaDTO;

@@ -1,17 +1,10 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 public class Reporte2DTO {
-    private int anio;
     private String mes;
     private int cantidad_de_avisos;
 
-    public int getAnio() {
-        return anio;
-    }
 
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
 
     public String getMes() {
         return mes;

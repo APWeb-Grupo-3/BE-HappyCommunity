@@ -10,8 +10,9 @@ public class DocumentoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDocumentoPago;
-    @Column(name = "idReceptor",nullable = false)
-    private int idReceptor;
+    @ManyToOne
+    @JoinColumn(name = "idReceptor")
+    private Usuario idReceptor;
     @Column(name = "fechaEmision",nullable = false)
     private LocalDate fechaEmision;
     @Column(name = "fechaVencimeinto",nullable = false)
@@ -34,7 +35,7 @@ public class DocumentoPago {
     public DocumentoPago() {
     }
 
-    public DocumentoPago(int idDocumentoPago, int idReceptor, LocalDate fechaEmision, LocalDate fechaVencimiento, String moneda, double total, String estado, Usuario usuario, TipoDocPago tipoDocPago) {
+    public DocumentoPago(int idDocumentoPago, Usuario idReceptor, LocalDate fechaEmision, LocalDate fechaVencimiento, String moneda, double total, String estado, Usuario usuario, TipoDocPago tipoDocPago) {
         this.idDocumentoPago = idDocumentoPago;
         this.idReceptor = idReceptor;
         this.fechaEmision = fechaEmision;
@@ -46,11 +47,11 @@ public class DocumentoPago {
         this.tipoDocPago = tipoDocPago;
     }
 
-    public int getIdReceptor() {
+    public Usuario getIdReceptor() {
         return idReceptor;
     }
 
-    public void setIdReceptor(int idReceptor) {
+    public void setIdReceptor(Usuario idReceptor) {
         this.idReceptor = idReceptor;
     }
 
