@@ -103,5 +103,13 @@ public class UsuarioController {
         return listaDTO;
     }
 
+    @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
+    @GetMapping("/listar/{nombre_usuario}")
+    public List<UsuarioDTO> listarUsuario(@PathVariable("nombre_usuario") String nombre_usuario) {
+        return uS.findUser(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
 
 }

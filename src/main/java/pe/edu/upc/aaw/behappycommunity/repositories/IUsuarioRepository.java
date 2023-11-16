@@ -56,5 +56,9 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
             " ) AS Tabla ", nativeQuery = true)
     public List<String[]>findVecinosWithDebt();
 
+    @Query(value = "select * \n" +
+            " from usuario\n" +
+            " where nombre_usuario=:nombre_usuario",nativeQuery = true)
+    public List<Usuario> findUser(@Param("nombre_usuario") String nombre_usuario);
 
 }

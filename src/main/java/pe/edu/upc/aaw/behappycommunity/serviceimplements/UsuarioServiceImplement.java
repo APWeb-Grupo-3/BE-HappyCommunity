@@ -41,5 +41,8 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public Usuario listarId(long idUsuario) {
         return uR.findById(idUsuario).orElse(new Usuario());
     }
-
+    @Override
+    public List<Usuario> findUser(String nombre_usuario) {
+        return uR.findUser(nombre_usuario);
+    }
 }
