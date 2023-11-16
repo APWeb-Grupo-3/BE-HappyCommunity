@@ -16,10 +16,11 @@ public class Mensaje {
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-    @Column(name="idReceptor",nullable = false)
-    private String receptor;
+    @ManyToOne
+    @JoinColumn(name="idReceptor")
+    private Usuario receptor;
 
-    public Mensaje(int idMensaje, String titulo, String descripcion, Usuario usuario, String receptor) {
+    public Mensaje(int idMensaje, String titulo, String descripcion, Usuario usuario, Usuario receptor) {
         this.idMensaje = idMensaje;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -63,11 +64,11 @@ public class Mensaje {
         this.usuario = usuario;
     }
 
-    public String getReceptor() {
+    public Usuario getReceptor() {
         return receptor;
     }
 
-    public void setReceptor(String receptor) {
+    public void setReceptor(Usuario receptor) {
         this.receptor = receptor;
     }
 }
