@@ -10,27 +10,26 @@ import java.util.List;
 @Repository
 public interface IDocumentoPagoRepository extends JpaRepository<DocumentoPago,Integer> {
     //HU44	Visualizar el mes con mayor deuda
-    @Query(value = " select to_char(fecha_vencimeinto, 'Month')  mes, sum(total)  sumatotal\n" +
+    @Query(value = "    select to_char(fecha_vencimeinto, 'Month') as mes, sum(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END) as sumatotal\n" +
             "   from documento_pago\n" +
             "   where estado = 'Vencido' and extract(year from fecha_vencimeinto) = extract(year from current_date)\n" +
             "   group by mes\n" +
-            "   having sum(total) = (\n" +
+            "   having sum(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END) = (\n" +
             "       select max(max_sumatotal)\n" +
             "       from (\n" +
-            "           select to_char(fecha_vencimeinto, 'Month') mes, sum(total)  max_sumatotal\n" +
+            "           select to_char(fecha_vencimeinto, 'Month') as mes, sum(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END) as max_sumatotal\n" +
             "           from documento_pago\n" +
             "           where estado = 'Vencido' and extract(year from fecha_vencimeinto) = extract(year from current_date)\n" +
             "           group by mes\n" +
-            "       ) temporal\n" +
-            "   );", nativeQuery = true)
-
-
+            "       ) as temporal\n" +
+            "   );\n", nativeQuery = true)
     List<Object[]> MesMayorDeuda();
 
 
-    @Query(value = "select to_char(fecha_vencimeinto, 'Month')  mes, sum(total)  sumames\n" +
+    @Query(value = "select to_char(fecha_vencimeinto, 'Month')  mes, sum(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END)  sumames\n" +
             "        from documento_pago\n" +
             "        where estado = 'Vencido' and extract(year from fecha_vencimeinto) = extract(year from current_date)\n" +
             "        group by mes", nativeQuery = true)
     List<Object[]>DeudaMes();
+
 }
