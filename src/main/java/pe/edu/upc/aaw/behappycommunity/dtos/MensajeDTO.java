@@ -8,7 +8,7 @@ public class MensajeDTO {
     private String titulo;
     private String descripcion;
     private Usuario usuario;
-    private String receptor;
+    private Usuario receptor;
 
     public int getIdMensaje() {
         return idMensaje;
@@ -42,11 +42,11 @@ public class MensajeDTO {
         this.usuario = usuario;
     }
 
-    public String getReceptor() {
+    public Usuario getReceptor() {
         return receptor;
     }
 
-    public void setReceptor(String receptor) {
+    public void setReceptor(Usuario receptor) {
         this.receptor = receptor;
     }
 }
