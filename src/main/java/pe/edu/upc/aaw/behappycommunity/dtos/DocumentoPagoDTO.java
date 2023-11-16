@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class DocumentoPagoDTO {
     private int idDocumentoPago;
-    private int idReceptor;
+    private Usuario idReceptor;
     private LocalDate fechaEmision;
     private LocalDate fechaVencimiento;
     private String moneda;
@@ -19,11 +19,11 @@ public class DocumentoPagoDTO {
 
     private TipoDocPago tipoDocPago;
 
-    public int getIdReceptor() {
+    public Usuario getIdReceptor() {
         return idReceptor;
     }
 
-    public void setIdReceptor(int idReceptor) {
+    public void setIdReceptor(Usuario idReceptor) {
         this.idReceptor = idReceptor;
     }
 

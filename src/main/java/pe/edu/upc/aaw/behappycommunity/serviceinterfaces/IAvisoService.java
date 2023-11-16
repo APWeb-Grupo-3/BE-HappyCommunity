@@ -9,7 +9,7 @@ public interface IAvisoService {
     public void insert(Aviso aviso);
     public List<Aviso> list();
     public void delete(int idAviso);
-    public List<String[]> quantityAnnouncementPerMonth();
+    public List<String[]> quantityAnnouncementPerMonth(int anio);
     public Aviso listarId(int idAviso);
 
 }

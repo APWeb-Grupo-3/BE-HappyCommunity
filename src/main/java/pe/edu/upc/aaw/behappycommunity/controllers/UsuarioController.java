@@ -61,6 +61,9 @@ public class UsuarioController {
     public void modificar(@RequestBody UsuarioDTO dto){
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto,Usuario.class);
+        String claveEncriptada = BCrypt.hashpw(u.getClave(), BCrypt.gensalt(10));
+
+        u.setClave(claveEncriptada);
         uS.insert(u);
     }
     @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
