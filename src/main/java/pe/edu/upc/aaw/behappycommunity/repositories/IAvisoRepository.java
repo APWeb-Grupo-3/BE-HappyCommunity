@@ -68,4 +68,19 @@ public interface IAvisoRepository extends JpaRepository<Aviso, Integer> {
             "from aviso\n" +
             "where id_condominio=:id_condominio",nativeQuery = true)
     public List<Aviso>listAvisosByCondominio(@Param("id_condominio")Long id_condominio);
+
+
+    @Query(value="select\n" +
+            " a.id_aviso,\n" +
+            " a.titulo,\n" +
+            " a.descripcion,\n" +
+            " a.fecha_publicacion,\n" +
+            " a.usuario,\n" +
+            " a.id_condominio\n" +
+            " from aviso a\n" +
+            " inner join usuario u\n" +
+            " on a.usuario=u.id_usuario\n" +
+            " where u.nombre_usuario=:nombre_usuario",nativeQuery = true)
+    public List<Aviso>findAvisosR(@Param("nombre_usuario") String nombre_usuario);
+
 }

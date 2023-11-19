@@ -88,4 +88,25 @@ public class DocumentoPagoController {
     }
 
 
+    @GetMapping("/listardar/{nombre_usuario}")
+    public List<DocumentoPagoDTO>listarDAR(@PathVariable("nombre_usuario") String nombre_usuario){
+        return dS.findDocumentoAR(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,DocumentoPagoDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listardre/{nombre_usuario}")
+    public List<DocumentoPagoDTO>listarDRE(@PathVariable("nombre_usuario") String nombre_usuario){
+        return dS.findDocumentoR(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,DocumentoPagoDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listardard/{nombre_usuario}")
+    public List<DocumentoPagoDTO>listarDARD(@PathVariable("nombre_usuario") String nombre_usuario){
+        return dS.findDocumentoRD(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,DocumentoPagoDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

@@ -15,4 +15,17 @@ public interface IPlanConvivenciaRepository extends JpaRepository<PlanConvivenci
             " from plan_convivencia\n" +
             " where id_condominio=:id_condominio",nativeQuery = true)
     public List<PlanConvivencia> findPlanC(@Param("id_condominio") Long id_condominio);
+
+
+    @Query(value="select\n" +
+            " p.id_plan_convivencia,\n" +
+            " p.titulo,\n" +
+            " p.descripcion,\n" +
+            " p.id_condominio\n" +
+            " from plan_convivencia p\n" +
+            " inner join condominio c\n" +
+            " on p.id_condominio=c.id_condominio\n" +
+            " where c.administrador=:administrador",nativeQuery = true)
+    public List<PlanConvivencia>findPlanR(@Param("administrador") String administrador);
+
 }

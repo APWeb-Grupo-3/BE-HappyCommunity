@@ -41,4 +41,9 @@ public class AvisoServiceImplement implements IAvisoService {
     public List<Aviso> listAvisosByCondominio(Long id_condominio) {
         return aR.listAvisosByCondominio(id_condominio);
     }
+
+    @Override
+    public List<Aviso> findAvisosR(String nombre_usuario) {
+        return aR.findAvisosR(nombre_usuario);
+    }
 }

@@ -76,4 +76,13 @@ public class AvisoController {
         AvisoDTO dto=m.map(aS.listarId(id),AvisoDTO.class);
         return dto;
     }
+    @GetMapping("/listarar/{nombre_usuario}")
+    public List<AvisoDTO>listarAvisosR(@PathVariable("nombre_usuario") String nombre_usuario){
+        return aS.findAvisosR(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,AvisoDTO.class);
+
+        }).collect(Collectors.toList());
+
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.aaw.behappycommunity.entities.DocumentoPago;
 
+import javax.print.Doc;
 import java.util.List;
 
 @Repository
@@ -109,4 +110,61 @@ public interface IDocumentoPagoRepository extends JpaRepository<DocumentoPago,In
             "    mes;", nativeQuery = true)
     List<Object[]>DeudaMes( @Param("condominio")int condominio);
 
+
+
+    @Query(value="select\n" +
+            " dp.id_documento_pago,\n" +
+            " dp.id_receptor,\n" +
+            " dp.fecha_emision,\n" +
+            " dp.fecha_vencimeinto,\n" +
+            " dp.moneda,\n" +
+            " sum(de.subtotal_detalle) as total,\n" +
+            " dp.estado,\n" +
+            " dp.id_usuario,\n" +
+            " dp.id_tipo_doc_pago\n" +
+            " from documento_pago dp\n" +
+            " inner join usuario u\n" +
+            " on dp.id_usuario=u.id_usuario\n" +
+            " inner join detalle de\n" +
+            " on dp.id_documento_pago=de.id_documento_pago\n" +
+            " group by dp.id_documento_pago,total,u.nombre_usuario\n" +
+            " having u.nombre_usuario=:nombre_usuario\n"+
+            " order by dp.id_documento_pago asc\n",nativeQuery = true)
+    public List<DocumentoPago>findDocumentoAR(@Param("nombre_usuario") String nombre_usuario);
+
+    @Query(value="select\n" +
+            " dp.id_documento_pago,\n" +
+            " dp.id_receptor,\n" +
+            " dp.fecha_emision,\n" +
+            " dp.fecha_vencimeinto,\n" +
+            " dp.moneda,\n" +
+            " sum(de.subtotal_detalle) as total,\n" +
+            " dp.estado,\n" +
+            " dp.id_usuario,\n" +
+            " dp.id_tipo_doc_pago\n" +
+            " from documento_pago dp\n" +
+            " inner join usuario u\n" +
+            " on dp.id_receptor=u.id_usuario\n" +
+            " inner join detalle de\n" +
+            " on dp.id_documento_pago=de.id_documento_pago\n" +
+            " group by dp.id_documento_pago,total,u.nombre_usuario\n" +
+            " having u.nombre_usuario=:nombre_usuario\n" +
+            " order by dp.id_documento_pago asc",nativeQuery = true)
+    public List<DocumentoPago>findDocumentoR(@Param("nombre_usuario") String nombre_usuario);
+
+    @Query(value="select\n" +
+            " dp.id_documento_pago,\n" +
+            " dp.id_receptor,\n" +
+            " dp.fecha_emision,\n" +
+            " dp.fecha_vencimeinto,\n" +
+            " dp.moneda,\n" +
+            " dp.total,\n" +
+            " dp.estado,\n" +
+            " dp.id_usuario,\n" +
+            " dp.id_tipo_doc_pago\n" +
+            " from documento_pago dp\n" +
+            " inner join usuario u\n" +
+            " on dp.id_usuario=u.id_usuario\n" +
+            " where u.nombre_usuario=:nombre_usuario",nativeQuery = true)
+    public List<DocumentoPago>findDocumentoRD(@Param("nombre_usuario") String nombre_usuario);
 }
