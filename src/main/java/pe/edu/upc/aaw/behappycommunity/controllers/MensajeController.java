@@ -54,6 +54,21 @@ public class MensajeController {
         MensajeDTO dto=m.map(mS.listarId(id),MensajeDTO.class);
         return dto;
     }
+    @GetMapping("/listarme/{nombre_usuario}")
+    public List<MensajeDTO> listarME(@PathVariable("nombre_usuario") String nombre_usuario){
+        return mS.findMensajeE(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,MensajeDTO.class);
 
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listarmr/{nombre_usuario}")
+    public List<MensajeDTO> listarMR(@PathVariable("nombre_usuario") String nombre_usuario){
+        return mS.findMensajeR(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,MensajeDTO.class);
+
+        }).collect(Collectors.toList());
+    }
 
 }

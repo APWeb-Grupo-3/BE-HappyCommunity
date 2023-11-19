@@ -33,5 +33,10 @@ public class TipoServicioServiceImplement implements ITipoServicioService {
         return tsR.findById(idTipoServicio).orElse(new TipoServicio());
     }
 
+    @Override
+    public List<TipoServicio> findTipoSA(String administrador) {
+        return tsR.findTipoSA(administrador);
+    }
+
 
 }

@@ -36,4 +36,9 @@ public class ServicioServiceImplement implements IServicioService {
         return serR.findById(idServicio).orElse(new Servicio());
     }
 
+    @Override
+    public List<Servicio> findServicioA(String administrador) {
+        return serR.findServicioA(administrador);
+    }
+
 }

@@ -32,4 +32,14 @@ public class MensajeServiceImplement implements IMensajeService {
         return mR.findById(idMensaje).orElse(new Mensaje());
     }
 
+    @Override
+    public List<Mensaje> findMensajeE(String nombre_usuario) {
+        return mR.findMensajeE(nombre_usuario);
+    }
+
+    @Override
+    public List<Mensaje> findMensajeR(String nombre_usuario) {
+        return mR.findMensajeR(nombre_usuario);
+    }
+
 }

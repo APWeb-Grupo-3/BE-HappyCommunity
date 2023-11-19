@@ -32,4 +32,9 @@ public class TarjetaServiceImplement implements ITarjetaService {
         return tR.findById(idTarjeta).orElse(new Tarjeta());
     }
 
+    @Override
+    public List<Tarjeta> findTarjetaR(String nombre_usuario) {
+        return tR.findTarjetaR(nombre_usuario);
+    }
+
 }

@@ -51,4 +51,12 @@ public class TarjetaController {
         TarjetaDTO dto=m.map(tS.listarId(id),TarjetaDTO.class);
         return dto;
     }
+    @GetMapping("/listartr/{nombre_usuario}")
+    public List<TarjetaDTO> listarTR(@PathVariable("nombre_usuario") String nombre_usuario){
+        return tS.findTarjetaR(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,TarjetaDTO.class);
+
+        }).collect(Collectors.toList());
+    }
 }

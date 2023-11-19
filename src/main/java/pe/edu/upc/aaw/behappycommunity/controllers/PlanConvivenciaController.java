@@ -55,4 +55,11 @@ public class PlanConvivenciaController {
         pS.delete(id);
     }
 
+    @GetMapping("/listarpc/{id_condominio}")
+    public List<PlanConvivenciaDTO> listarPlanC(@PathVariable("id_condominio") Long id_condominio){
+        return pS.findPlanC(id_condominio).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,PlanConvivenciaDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

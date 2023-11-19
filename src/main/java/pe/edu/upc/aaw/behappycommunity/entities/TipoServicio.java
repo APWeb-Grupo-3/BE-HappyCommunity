@@ -12,10 +12,19 @@ public class TipoServicio {
 
     @Column(name="nombreTipoServicio", nullable = false,length = 50)
     private String nombreTipoServicio;
-
+    @Column(name = "administrador",nullable = false,length = 45)
+    private String administrador;
 
     public TipoServicio(){
 
+    }
+
+    public String getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(String administrador) {
+        this.administrador = administrador;
     }
 
     public TipoServicio(int idTipoServicio, String nombreTipoServicio) {

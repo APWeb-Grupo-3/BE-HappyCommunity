@@ -2,6 +2,7 @@ package pe.edu.upc.aaw.behappycommunity.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.aaw.behappycommunity.entities.Condominio;
 import pe.edu.upc.aaw.behappycommunity.entities.Usuario;
 import pe.edu.upc.aaw.behappycommunity.repositories.IUsuarioRepository;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.IUsuarioService;
@@ -45,4 +46,11 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public List<Usuario> findUser(String nombre_usuario) {
         return uR.findUser(nombre_usuario);
     }
+
+    @Override
+    public List<Usuario> findUsersC(Long id_condominio) {
+        return uR.findUsersC(id_condominio);
+    }
+
+
 }

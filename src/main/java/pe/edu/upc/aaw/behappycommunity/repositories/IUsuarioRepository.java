@@ -1,5 +1,6 @@
 package pe.edu.upc.aaw.behappycommunity.repositories;
 
+import org.hibernate.annotations.Parent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -60,5 +61,25 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
             " from usuario\n" +
             " where nombre_usuario=:nombre_usuario",nativeQuery = true)
     public List<Usuario> findUser(@Param("nombre_usuario") String nombre_usuario);
+
+
+    @Query(value="select \n" +
+            "u.id_usuario,\n" +
+            "u.nombre_usuario,\n" +
+            "u.clave,\n" +
+            "u.habilitado,\n" +
+            "u.id_rol_usuario,\n" +
+            "u.nombres,\n" +
+            "u.apellidos,\n" +
+            "u.correo,\n" +
+            "u.edad,\n" +
+            "u.telefono,\n" +
+            "u.genero\n" +
+            "from usuario u\n" +
+            "inner join solicitud_acceso sa\n" +
+            "on sa.id_usuario=u.id_usuario\n" +
+            "where sa.id_condominio=:id_condominio and sa.estado='Aprobado'",nativeQuery = true)
+    public List<Usuario>findUsersC(@Param("id_condominio") Long id_condominio);
+
 
 }

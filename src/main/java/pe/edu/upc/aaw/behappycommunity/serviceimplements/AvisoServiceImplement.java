@@ -36,4 +36,9 @@ public class AvisoServiceImplement implements IAvisoService {
     public Aviso listarId(int idAviso) {
         return aR.findById(idAviso).orElse( new Aviso());
     }
+
+    @Override
+    public List<Aviso> listAvisosByCondominio(Long id_condominio) {
+        return aR.listAvisosByCondominio(id_condominio);
+    }
 }

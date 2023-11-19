@@ -1,9 +1,20 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
+import javax.persistence.Column;
+
 public class TipoServicioDTO {
     private int idTipoServicio;
     private String nombreTipoServicio;
 
+    private String administrador;
+
+    public String getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(String administrador) {
+        this.administrador = administrador;
+    }
 
     public int getIdTipoServicio() {
         return idTipoServicio;

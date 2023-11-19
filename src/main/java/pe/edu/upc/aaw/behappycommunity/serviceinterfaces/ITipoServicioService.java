@@ -1,5 +1,6 @@
 package pe.edu.upc.aaw.behappycommunity.serviceinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.aaw.behappycommunity.entities.TipoServicio;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface ITipoServicioService {
     void delete(int idTipoServicio);
     public TipoServicio listarId(int idTipoServicio);
 
+    public List<TipoServicio> findTipoSA(String administrador);
 
 
 

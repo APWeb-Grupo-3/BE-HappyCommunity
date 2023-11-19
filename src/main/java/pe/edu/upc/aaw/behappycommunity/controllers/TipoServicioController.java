@@ -52,18 +52,13 @@ public class TipoServicioController {
         TipoServicioDTO dto=m.map(tsS.listarId(id),TipoServicioDTO.class);
         return dto;
     }
-
-
-
-
-
-
-
-
-
-
-
-
+    @GetMapping("/listartsa/{administrador}")
+    public List<TipoServicioDTO> listaTipoSA(@PathVariable("administrador") String administrador) {
+        return tsS.findTipoSA(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,TipoServicioDTO.class);
+        }).collect(Collectors.toList());
+    }
 
 
 
