@@ -60,6 +60,15 @@ public class AvisoController {
         }
         return listaDTO;
     }
+    @GetMapping("/listar/{id_condominio}")
+    public List<AvisoDTO>listarAvisoPorCondominio(@PathVariable("id_condominio") Long id_condominio){
+        return aS.listAvisosByCondominio(id_condominio).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,AvisoDTO.class);
+
+        }).collect(Collectors.toList());
+
+    }
     @PreAuthorize("hasAuthority('ADMINISTRADOR')or hasAuthority('VECINO')")
     @GetMapping("/{id}")
     public AvisoDTO listarId(@PathVariable("id") Integer id) {

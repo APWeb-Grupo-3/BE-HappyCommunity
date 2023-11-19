@@ -53,5 +53,12 @@ public class ServicioController {
         ServicioDTO dto=m.map(serR.listarId(id),ServicioDTO.class);
         return dto;
     }
+    @GetMapping("/listarsa/{administrador}")
+    public List<ServicioDTO> listarServiciosA(@PathVariable("administrador") String administrador){
+        return serR.findServicioA(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,ServicioDTO.class);
+        }).collect(Collectors.toList());
+    }
 
 }

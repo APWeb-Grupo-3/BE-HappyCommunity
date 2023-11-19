@@ -10,13 +10,18 @@ public class TipoDocPago {
     private int idTipoDocPago;
     @Column(name = "nombre",length = 150,nullable = false)
     private String nombre;
+    @Column(name = "administrador",nullable = false,length = 45)
+    private String administrador;
 
     public TipoDocPago() {
     }
 
-    public TipoDocPago(int idTipoDocPago, String nombre) {
-        this.idTipoDocPago = idTipoDocPago;
-        this.nombre = nombre;
+    public String getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(String administrador) {
+        this.administrador = administrador;
     }
 
     public int getIdTipoDocPago() {

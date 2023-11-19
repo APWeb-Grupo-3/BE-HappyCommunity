@@ -32,4 +32,9 @@ public class PlanConvivenciaServiceImplement implements IPlanConvivenciaService 
     public PlanConvivencia listarId(int IdPlanConvivencia) {
         return pR.findById(IdPlanConvivencia).orElse(new PlanConvivencia());
     }
+
+    @Override
+    public List<PlanConvivencia> findPlanC(Long id_condominio) {
+        return pR.findPlanC(id_condominio);
+    }
 }

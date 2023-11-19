@@ -16,17 +16,12 @@ public class Condominio {
     private String distrito;
     @Column(name = "direccion",nullable = false,length = 45)
     private String direccion;
-
+    @Column(name = "administrador",nullable = false,length = 45)
+    private String administrador;
     public Condominio() {
     }
 
-    public Condominio(int idCondominio, String nombre, String departamento, String distrito, String direccion) {
-        this.idCondominio = idCondominio;
-        this.nombre = nombre;
-        this.departamento = departamento;
-        this.distrito = distrito;
-        this.direccion = direccion;
-    }
+
 
     public int getIdCondominio() {
         return idCondominio;
@@ -66,5 +61,13 @@ public class Condominio {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(String administrador) {
+        this.administrador = administrador;
     }
 }

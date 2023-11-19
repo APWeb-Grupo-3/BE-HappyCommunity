@@ -56,5 +56,20 @@ public class CondominioController {
         CondominioDTO dto=m.map(dS.listarId(id),CondominioDTO.class);
         return dto;
     }
+    @GetMapping("/listarcar/{administrador}")
+    public List<CondominioDTO> listarCondominiosAR(@PathVariable("administrador") String administrador){
+        return dS.findCondominioAR(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,CondominioDTO.class);
 
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listarcva/{nombre_usuario}")
+    public List<CondominioDTO> listarCondominiosVA(@PathVariable("nombre_usuario") String nombre_usuario){
+        return dS.findCondominioVA(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,CondominioDTO.class);
+
+        }).collect(Collectors.toList());
+    }
 }

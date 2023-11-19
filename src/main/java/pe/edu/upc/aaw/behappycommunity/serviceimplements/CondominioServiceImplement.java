@@ -33,4 +33,14 @@ public class CondominioServiceImplement implements ICondominioService {
     public Condominio listarId(int IdCondominio) {
         return dR.findById(IdCondominio).orElse(new Condominio());
     }
+
+    @Override
+    public List<Condominio> findCondominioAR(String administrador) {
+        return dR.findCondominioAR(administrador);
+    }
+
+    @Override
+    public List<Condominio> findCondominioVA(String nombre_usuario) {
+        return dR.findCondominioVA(nombre_usuario);
+    }
 }

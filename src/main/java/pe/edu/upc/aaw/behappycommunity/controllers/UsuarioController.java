@@ -104,12 +104,18 @@ public class UsuarioController {
     }
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR') or hasAuthority('VECINO') or hasAuthority('INVITADO')")
-    @GetMapping("/listar/{nombre_usuario}")
+    @GetMapping("/listaru/{nombre_usuario}")
     public List<UsuarioDTO> listarUsuario(@PathVariable("nombre_usuario") String nombre_usuario) {
         return uS.findUser(nombre_usuario).stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x,UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
-
+    @GetMapping("/listaruc/{id_condominio}")
+    public List<UsuarioDTO> listarUsuarioC(@PathVariable("id_condominio") Long id_condominio) {
+        return uS.findUsersC(id_condominio).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

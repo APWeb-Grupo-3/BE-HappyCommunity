@@ -64,4 +64,8 @@ public interface IAvisoRepository extends JpaRepository<Aviso, Integer> {
             " where anio=:anio",nativeQuery = true)
     public List<String[]> quantityAnnouncementPerMonth(@Param("anio") int anio);
 
+    @Query(value = "select *\n" +
+            "from aviso\n" +
+            "where id_condominio=:id_condominio",nativeQuery = true)
+    public List<Aviso>listAvisosByCondominio(@Param("id_condominio")Long id_condominio);
 }

@@ -31,4 +31,14 @@ public class SolicitudAccesoServiceImplement implements ISolicitudAccesoSevice {
     public SolicitudAcceso listarId(int IdSolicitudAcceso) {
         return sR.findById(IdSolicitudAcceso).orElse(new SolicitudAcceso() );
     }
+
+    @Override
+    public List<SolicitudAcceso> findSolicitudVE(String nombre_usuario) {
+        return sR.findSolicitudVE(nombre_usuario);
+    }
+
+    @Override
+    public List<SolicitudAcceso> findSolicitudAR(String administrador) {
+        return sR.findSolicitudAR(administrador);
+    }
 }

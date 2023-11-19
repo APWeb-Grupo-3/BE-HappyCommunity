@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.behappycommunity.dtos.SolicitudAccesoDTO;
+import pe.edu.upc.aaw.behappycommunity.dtos.UsuarioDTO;
 import pe.edu.upc.aaw.behappycommunity.entities.SolicitudAcceso;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.ISolicitudAccesoSevice;
 
@@ -52,5 +53,18 @@ public class SolicitudAccesoController {
         SolicitudAccesoDTO dto=m.map(sS.listarId(id),SolicitudAccesoDTO.class);
         return dto;
     }
-
+    @GetMapping("/listarsve/{nombre_usuario}")
+    public List<SolicitudAccesoDTO> listarSolicitudVenviados(@PathVariable("nombre_usuario") String nombre_usuario) {
+        return sS.findSolicitudVE(nombre_usuario).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,SolicitudAccesoDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listarsar/{administrador}")
+    public List<SolicitudAccesoDTO> listarSolicitudArecibidos(@PathVariable("administrador") String administrador) {
+        return sS.findSolicitudAR(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,SolicitudAccesoDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

@@ -7,6 +7,8 @@ public class CondominioDTO {
     private String departamento;
     private String distrito;
     private String direccion;
+    private String administrador;
+
 
     public int getIdCondominio() {
         return idCondominio;
@@ -46,5 +48,13 @@ public class CondominioDTO {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(String administrador) {
+        this.administrador = administrador;
     }
 }
