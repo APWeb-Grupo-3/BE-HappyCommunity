@@ -34,9 +34,12 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public List<String[]> findVecinosWithDebt() {
-        return uR.findVecinosWithDebt();
+    public List<String[]> findVecinosWithDebt(String administrador) {
+        return uR.findVecinosWithDebt(administrador);
     }
+
+
+
 
     @Override
     public Usuario listarId(long idUsuario) {

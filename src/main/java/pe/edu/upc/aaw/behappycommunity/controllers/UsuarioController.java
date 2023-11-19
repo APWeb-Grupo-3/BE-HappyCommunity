@@ -90,15 +90,16 @@ public class UsuarioController {
         return listaDTO;
     }
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/reporte3")
-    public List<Reporte3DTO>visualizarVecinosConDeuda(){
-        List<String[]>lista=uS.findVecinosWithDebt();
-        List<Reporte3DTO>listaDTO= new ArrayList<>();
+    @GetMapping("/reporte3/{administrador}")
+    public List<Reporte3DTO>visualizarVecinosConDeuda(@PathVariable("administrador")String administrador){
+        List<String[]>lista=uS.findVecinosWithDebt(administrador);
+        List<Reporte3DTO>listaDTO=new ArrayList<>();
         for(String[] data:lista){
             Reporte3DTO dto=new Reporte3DTO();
-            dto.setApellidos(data[0]);
-            dto.setNombres(data[1]);
-            dto.setEstado(data[2]);
+            dto.setIdUsuario(Long.parseLong(data[0]));
+            dto.setApellidos(data[1]);
+            dto.setNombres(data[2]);
+            dto.setNombreUsuario(data[3]);
             listaDTO.add(dto);
         }
         return listaDTO;
