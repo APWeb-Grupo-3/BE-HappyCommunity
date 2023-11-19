@@ -13,7 +13,7 @@ public interface IUsuarioService {
     public Usuario listarId(long idUsuario);
 
 
-    public List<String[]>findVecinosWithoutDebt();
+    public List<String[]>findVecinosWithoutDebt(String administrador);
 
     public List<String[]>findVecinosWithDebt();
     public List<Usuario> findUser(String nombre_usuario);

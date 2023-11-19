@@ -1,9 +1,26 @@
 package pe.edu.upc.aaw.behappycommunity.dtos;
 
 public class Reporte1DTO {
+    private long idUsuario;
     private String apellidos;
     private String nombres;
-    private String estado;
+    private String nombreUsuario;
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
     public String getApellidos() {
         return apellidos;
@@ -21,11 +38,5 @@ public class Reporte1DTO {
         this.nombres = nombres;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }

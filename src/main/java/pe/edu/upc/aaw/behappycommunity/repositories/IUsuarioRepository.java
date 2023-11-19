@@ -30,19 +30,34 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
 
 
     //HU30: Visualizar vecinos con pagos al día
-    @Query(value="select apellidos,nombres,CASE estado\n" +
-            " WHEN 'Pagado' THEN 'Al día'\n" +
-            " END as \"Estado\" from\n" +
-            " (\n" +
-            " select distinct(u.id_usuario),u.apellidos,\n" +
-            " u.nombres,\n" +
-            " dp.estado\n" +
-            " from documento_pago dp\n" +
-            " inner join usuario u\n" +
-            " on dp.id_receptor=u.id_usuario\n" +
-            " where dp.estado='Pagado'\n" +
-            " )tabla ",nativeQuery = true)
-    public List<String[]> findVecinosWithoutDebt();
+    @Query(value="SELECT \n" +
+            "   distinct(m.id_usuario),\n" +
+            "   m.apellidos,\n" +
+            "   m.nombres,\n" +
+            "   m.nombre_usuario\n" +
+            " FROM\n" +
+            "   (\n" +
+            "     SELECT \n" +
+            "       u.*\n" +
+            "     FROM \n" +
+            "       usuario u\n" +
+            "       INNER JOIN solicitud_acceso sa ON u.id_usuario = sa.id_usuario\n" +
+            "       INNER JOIN condominio c ON c.id_condominio = sa.id_condominio\n" +
+            "     WHERE \n" +
+            "       sa.estado = 'Aprobado'\n" +
+            "       AND c.administrador = :administrador\n" +
+            "   ) AS m\n" +
+            " inner join documento_pago dp\n" +
+            " on dp.id_receptor=m.id_usuario\n" +
+            " where m.id_usuario not in (\n" +
+            " \tSELECT\n" +
+            "       dp.id_receptor\n" +
+            "     FROM\n" +
+            "       documento_pago dp\n" +
+            "     WHERE\n" +
+            "       dp.estado = 'Vencido' or dp.estado='Pendiente'\n" +
+            " )",nativeQuery = true)
+    public List<String[]> findVecinosWithoutDebt(@Param("administrador")String administrador);
 
     @Query(value ="SELECT apellidos, nombres, CASE\n" +
             " WHEN estado = 'Deuda' THEN 'Vecino con deuda'\n" +
@@ -64,21 +79,21 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
 
 
     @Query(value="select \n" +
-            "u.id_usuario,\n" +
-            "u.nombre_usuario,\n" +
-            "u.clave,\n" +
-            "u.habilitado,\n" +
-            "u.id_rol_usuario,\n" +
-            "u.nombres,\n" +
-            "u.apellidos,\n" +
-            "u.correo,\n" +
-            "u.edad,\n" +
-            "u.telefono,\n" +
-            "u.genero\n" +
-            "from usuario u\n" +
-            "inner join solicitud_acceso sa\n" +
-            "on sa.id_usuario=u.id_usuario\n" +
-            "where sa.id_condominio=:id_condominio and sa.estado='Aprobado'",nativeQuery = true)
+            " u.id_usuario,\n" +
+            " u.nombre_usuario,\n" +
+            " u.clave,\n" +
+            " u.habilitado,\n" +
+            " u.id_rol_usuario,\n" +
+            " u.nombres,\n" +
+            " u.apellidos,\n" +
+            " u.correo,\n" +
+            " u.edad,\n" +
+            " u.telefono,\n" +
+            " u.genero\n" +
+            " from usuario u\n" +
+            " inner join solicitud_acceso sa\n" +
+            " on sa.id_usuario=u.id_usuario\n" +
+            " where sa.id_condominio=:id_condominio and sa.estado='Aprobado'",nativeQuery = true)
     public List<Usuario>findUsersC(@Param("id_condominio") Long id_condominio);
 
 
