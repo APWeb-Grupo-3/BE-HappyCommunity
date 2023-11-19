@@ -13,5 +13,6 @@ public interface IAvisoService {
     public List<String[]> quantityAnnouncementPerMonth(int anio);
     public Aviso listarId(int idAviso);
     public List<Aviso>listAvisosByCondominio(Long id_condominio);
+    public List<Aviso>findAvisosR(String nombre_usuario);
 
 }

@@ -47,6 +47,21 @@ public class DocumentoPagoServiceImplement implements IDocumentoPagoService {
         return dR.findById(IdDocumentoPago).orElse(new DocumentoPago());
     }
 
+    @Override
+    public List<DocumentoPago> findDocumentoAR(String nombre_usuario) {
+        return dR.findDocumentoAR(nombre_usuario);
+    }
+
+    @Override
+    public List<DocumentoPago> findDocumentoR(String nombre_usuario) {
+        return dR.findDocumentoR(nombre_usuario);
+    }
+
+    @Override
+    public List<DocumentoPago> findDocumentoRD(String nombre_usuario) {
+        return dR.findDocumentoRD(nombre_usuario);
+    }
+
 
     //HU28: Visualizar pagos pendientes (vecino)
 }

@@ -53,4 +53,18 @@ public class DetalleController {
         DetalleDTO dto=m.map(detR.listarId(id),DetalleDTO.class);
         return dto;
     }
+    @GetMapping("/listarddoc/{id_documento_pago}")
+    public List<DetalleDTO> listarDodc(@PathVariable("id_documento_pago") int id_documento_pago) {
+        return detR.findDetalleDoc(id_documento_pago).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, DetalleDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/listardear/{nombre_usuario}")
+    public List<DetalleDTO> listarDodc(@PathVariable("nombre_usuario") String nombre_usuario) {
+        return detR.findDetalleAR(nombre_usuario).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, DetalleDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

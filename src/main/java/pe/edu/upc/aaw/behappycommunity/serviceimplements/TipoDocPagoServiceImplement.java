@@ -32,4 +32,9 @@ public class TipoDocPagoServiceImplement implements ITipoDocPagoService {
         return tR.findById(idTipoDocPago).orElse(new TipoDocPago());
     }
 
+    @Override
+    public List<TipoDocPago> findTipoDR(String administrador) {
+        return tR.findTipoDR(administrador);
+    }
+
 }

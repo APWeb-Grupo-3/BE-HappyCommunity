@@ -37,4 +37,9 @@ public class PlanConvivenciaServiceImplement implements IPlanConvivenciaService 
     public List<PlanConvivencia> findPlanC(Long id_condominio) {
         return pR.findPlanC(id_condominio);
     }
+
+    @Override
+    public List<PlanConvivencia> findPlanR(String administrador) {
+        return pR.findPlanR(administrador);
+    }
 }

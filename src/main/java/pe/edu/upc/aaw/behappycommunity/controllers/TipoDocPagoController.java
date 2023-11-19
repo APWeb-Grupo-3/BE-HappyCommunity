@@ -51,4 +51,11 @@ public class TipoDocPagoController {
         TipoDocPagoDTO dto=m.map(tS.listarId(id),TipoDocPagoDTO.class);
         return dto;
     }
+    @GetMapping("/listartdr/{administrador}")
+    public List<TipoDocPagoDTO> listarTipoDR(@PathVariable("administrador") String administrador){
+        return tS.findTipoDR(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,TipoDocPagoDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

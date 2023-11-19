@@ -62,4 +62,11 @@ public class PlanConvivenciaController {
             return m.map(x,PlanConvivenciaDTO.class);
         }).collect(Collectors.toList());
     }
+    @GetMapping("/listarpcr/{administrador}")
+    public List<PlanConvivenciaDTO> listarPlanCR(@PathVariable("administrador") String administrador){
+        return pS.findPlanR(administrador).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,PlanConvivenciaDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

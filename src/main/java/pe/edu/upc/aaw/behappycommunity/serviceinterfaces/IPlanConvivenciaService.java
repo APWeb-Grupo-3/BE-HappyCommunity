@@ -12,5 +12,6 @@ public interface IPlanConvivenciaService {
 
     public PlanConvivencia listarId(int IdPlanConvivencia);
     public List<PlanConvivencia> findPlanC(Long id_condominio);
+    public List<PlanConvivencia>findPlanR(String administrador);
 
 }
