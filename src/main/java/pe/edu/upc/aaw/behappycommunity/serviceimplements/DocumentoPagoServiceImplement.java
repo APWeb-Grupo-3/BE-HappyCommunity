@@ -30,14 +30,16 @@ public class DocumentoPagoServiceImplement implements IDocumentoPagoService {
 
     //HU44	Visualizar el mes con mayor deuda
     @Override
-    public List<Object[]> MesMayorDeuda() {
-        return dR.MesMayorDeuda();
+    public List<Object[]> MesMayorDeuda(int condominio) {
+        return dR.MesMayorDeuda(condominio);
     }
 
     @Override
-    public List<Object[]> DeudaMes() {
-        return dR.DeudaMes();
+    public List<Object[]> DeudaMes( int condomino) {
+        return dR.DeudaMes( condomino);
     }
+
+
 
 
     @Override
