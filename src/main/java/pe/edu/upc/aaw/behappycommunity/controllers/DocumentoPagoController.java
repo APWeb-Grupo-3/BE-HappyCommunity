@@ -53,9 +53,9 @@ public class DocumentoPagoController {
     //HU44	Visualizar el mes con mayor deuda
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/MesMayorDeuda/{condominio}")
-    public List<MesDeudaReDTO>MesMayorDeuda(@PathVariable("condominio") int condominio ){
-        List<Object[]>lista=dS.MesMayorDeuda(condominio);
+    @GetMapping("/MesMayorDeuda/{nombreusuario}")
+    public List<MesDeudaReDTO>MesMayorDeuda(@PathVariable("nombreusuario") String nombreusuario){
+        List<Object[]>lista=dS.MesMayorDeuda(nombreusuario);
         List<MesDeudaReDTO>listaDTO=new ArrayList<>();
         for(Object[] data:lista){
             MesDeudaReDTO dto=new MesDeudaReDTO();

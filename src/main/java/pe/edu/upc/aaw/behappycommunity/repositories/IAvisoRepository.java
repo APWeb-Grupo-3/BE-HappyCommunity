@@ -37,32 +37,27 @@ public interface IAvisoRepository extends JpaRepository<Aviso, Integer> {
 
      */
 
-    @Query(value="select mes,cantidad_de_avisos\n" +
-            " from\n" +
-            " (SELECT\n" +
-            "  EXTRACT(YEAR FROM fecha_publicacion) AS anio,\n" +
-            "  CASE EXTRACT(MONTH FROM fecha_publicacion)\n" +
-            "    WHEN 1 THEN 'Enero'\n" +
-            "    WHEN 2 THEN 'Febrero'\n" +
-            "    WHEN 3 THEN 'Marzo'\n" +
-            "    WHEN 4 THEN 'Abril'\n" +
-            "    WHEN 5 THEN 'Mayo'\n" +
-            "    WHEN 6 THEN 'Junio'\n" +
-            "    WHEN 7 THEN 'Julio'\n" +
-            "    WHEN 8 THEN 'Agosto'\n" +
-            "    WHEN 9 THEN 'Setiembre'\n" +
-            "    WHEN 10 THEN 'Octubre'\n" +
-            "    WHEN 11 THEN 'Noviembre'\n" +
-            "    WHEN 12 THEN 'Diciembre'\n" +
-            "  END AS mes,\n" +
-            "  COUNT(*) AS cantidad_de_avisos\n" +
-            " FROM\n" +
-            "  aviso\n" +
-            " GROUP BY\n" +
-            "  anio, mes\n" +
-            " ) reporte\n" +
-            " where anio=:anio",nativeQuery = true)
-    public List<String[]> quantityAnnouncementPerMonth(@Param("anio") int anio);
+    @Query(value="SELECT\n" +
+            "    mes,\n" +
+            "    cantidad_de_avisos\n" +
+            "FROM\n" +
+            "    (\n" +
+            "        SELECT\n" +
+            "\t\t\ta.id_condominio AS condomino,\n" +
+            "            EXTRACT(YEAR FROM fecha_publicacion) AS anio,\n" +
+            "            TO_CHAR(fecha_publicacion, 'Month') AS mes,\n" +
+            "            COUNT(*) AS cantidad_de_avisos\n" +
+            "        FROM\n" +
+            "            aviso a\n" +
+            "        INNER JOIN\n" +
+            "            condominio c ON a.id_condominio = c.id_condominio\n" +
+            "        WHERE\n" +
+            "            a.id_condominio = :condomino AND EXTRACT(YEAR FROM fecha_publicacion) = EXTRACT(YEAR FROM CURRENT_DATE)\n" +
+            "        GROUP BY\n" +
+            "            condomino, anio, mes\n" +
+            "    ) reporte\n" +
+            "\torder by  cantidad_de_avisos desc",nativeQuery = true)
+    public List<String[]> quantityAnnouncementPerMonth(@Param("condomino") int condomino);
 
     @Query(value = "select *\n" +
             "from aviso\n" +
