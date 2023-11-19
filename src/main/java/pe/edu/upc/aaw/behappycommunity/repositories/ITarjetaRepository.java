@@ -16,10 +16,13 @@ public interface ITarjetaRepository extends JpaRepository<Tarjeta, Integer> {
             " t.tipo_tarjeta,\n" +
             " t.numero_tarjeta,\n" +
             " t.fecha_vencimiento,\n" +
-            " t.codigo_seguridad\n" +
+            " t.codigo_seguridad,\n" +
+            " t.id_usuario\n" +
             " from tarjeta t\n" +
             " inner join usuario u\n" +
             " on t.id_usuario=u.id_usuario\n" +
             " where u.nombre_usuario=:nombre_usuario",nativeQuery = true)
     public List<Tarjeta>findTarjetaR(@Param("nombre_usuario") String nombre_usuario);
+
+
 }
