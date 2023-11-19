@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.behappycommunity.dtos.DocumentoPagoDTO;
 import pe.edu.upc.aaw.behappycommunity.dtos.MesDeudaReDTO;
 import pe.edu.upc.aaw.behappycommunity.dtos.Reporte1DTO;
+import pe.edu.upc.aaw.behappycommunity.dtos.Reporte2DTO;
 import pe.edu.upc.aaw.behappycommunity.entities.DocumentoPago;
 import pe.edu.upc.aaw.behappycommunity.serviceinterfaces.IDocumentoPagoService;
 
@@ -52,9 +53,9 @@ public class DocumentoPagoController {
     //HU44	Visualizar el mes con mayor deuda
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/MesMayorDeuda")
-    public List<MesDeudaReDTO>MesMayorDeuda(){
-        List<Object[]>lista=dS.MesMayorDeuda();
+    @GetMapping("/MesMayorDeuda/{condominio}")
+    public List<MesDeudaReDTO>MesMayorDeuda(@PathVariable("condominio") int condominio ){
+        List<Object[]>lista=dS.MesMayorDeuda(condominio);
         List<MesDeudaReDTO>listaDTO=new ArrayList<>();
         for(Object[] data:lista){
             MesDeudaReDTO dto=new MesDeudaReDTO();
@@ -73,9 +74,9 @@ public class DocumentoPagoController {
     }
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/MesDeuda")
-    public List<MesDeudaReDTO>DeudaMes(){
-        List<Object[]>lista=dS.DeudaMes();
+    @GetMapping("/MesDeuda/{condominio}")
+    public List<MesDeudaReDTO>DeudaMes(@PathVariable("condominio") int condominio){
+        List<Object[]>lista=dS.DeudaMes(condominio);
         List<MesDeudaReDTO>listaDTO=new ArrayList<>();
         for(Object[] data:lista){
             MesDeudaReDTO dto=new MesDeudaReDTO();
@@ -85,5 +86,6 @@ public class DocumentoPagoController {
         }
         return listaDTO;
     }
+
 
 }
