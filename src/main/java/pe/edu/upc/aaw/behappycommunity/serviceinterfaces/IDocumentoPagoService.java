@@ -12,7 +12,7 @@ public interface IDocumentoPagoService {
     //HU44	Visualizar el mes con mayor deuda
     List<Object[]> MesMayorDeuda(int condomino);
     //HU45	Visualizar el monto total de deudas por cada mes
-    List<Object[]> DeudaMes(int condomino);
+    List<Object[]> DeudaMes(String nombreusuario);
     public DocumentoPago listarId(int IdDocumentoPago);
     public List<DocumentoPago>findDocumentoAR(String nombre_usuario);
     public List<DocumentoPago>findDocumentoR(String nombre_usuario);
