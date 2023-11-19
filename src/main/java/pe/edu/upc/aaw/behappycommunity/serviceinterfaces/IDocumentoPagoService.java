@@ -10,7 +10,7 @@ public interface IDocumentoPagoService {
     public List<DocumentoPago>list();
     public void delete(int idDocumentoPago);
     //HU44	Visualizar el mes con mayor deuda
-    List<Object[]> MesMayorDeuda(int condomino);
+    List<Object[]> MesMayorDeuda(String nombreusuario);
     //HU45	Visualizar el monto total de deudas por cada mes
     List<Object[]> DeudaMes(String nombreusuario);
     public DocumentoPago listarId(int IdDocumentoPago);

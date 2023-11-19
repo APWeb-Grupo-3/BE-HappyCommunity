@@ -12,72 +12,47 @@ import java.util.List;
 @Repository
 public interface IDocumentoPagoRepository extends JpaRepository<DocumentoPago,Integer> {
     //HU44	Visualizar el mes con mayor deuda de cada condominio
-    @Query(value = "select\n" +
-            "    to_char(fecha_vencimeinto, 'Month') as mes,\n" +
-            "    sum(case when moneda = 'Dolares' then total * 3.7 else total end) as sumatotal\n" +
-            "from\n" +
-            "     (\n" +
-            "    select\n" +
-            "        c.id_condominio,\n" +
-            "        s.id_solicitud_acceso,\n" +
-            "        u.id_usuario,\n" +
-            "        d.id_documento_pago,\n" +
-            "        d.fecha_vencimeinto,\n" +
-            "        d.total,\n" +
-            "        d.estado,\n" +
-            "        d.moneda\n" +
-            "    from\n" +
-            "        condominio c\n" +
-            "    inner join\n" +
-            "        solicitud_acceso s on c.id_condominio = s.id_condominio\n" +
-            "    inner join\n" +
-            "        usuario u on s.id_usuario = u.id_usuario\n" +
-            "    inner join \n" +
-            "        documento_pago d on u.id_usuario = d.id_receptor\n" +
-            "    where\n" +
-            "        c.id_condominio = :condominio\n" +
-            ") as tempo\n" +
-            "where\n" +
-            "    estado = 'Vencido' and extract(year from fecha_vencimeinto) = extract(year from current_date)\n" +
-            "group by\n" +
-            "    mes\n" +
-            "having\n" +
-            "    sum(case when moneda = 'Dolares' then total * 3.7 else total end) = (\n" +
-            "        select\n" +
-            "            max(max_sumatotal)\n" +
-            "        from\n" +
-            "            (\n" +
-            "                select\n" +
-            "                    to_char(fecha_vencimeinto, 'Month') as mes,\n" +
-            "                    sum(case when moneda = 'Dolares' then total * 3.7 else total end) as max_sumatotal\n" +
-            "                from (\n" +
-            "                    select\n" +
-            "                        c.id_condominio,\n" +
-            "                        s.id_solicitud_acceso,\n" +
-            "                        u.id_usuario,\n" +
-            "                        d.id_documento_pago,\n" +
-            "                        d.fecha_vencimeinto,\n" +
-            "                        d.total,\n" +
-            "                        d.estado,\n" +
-            "                        d.moneda\n" +
-            "                    from\n" +
-            "                        condominio c\n" +
-            "                    inner join\n" +
-            "                        solicitud_acceso s on c.id_condominio = s.id_condominio\n" +
-            "                    inner join\n" +
-            "                        usuario u on s.id_usuario = u.id_usuario\n" +
-            "                    inner join \n" +
-            "                        documento_pago d on u.id_usuario = d.id_receptor\n" +
-            "                    where\n" +
-            "                        c.id_condominio = :condominio\n" +
-            "                ) as tempo\n" +
-            "                where\n" +
-            "                    estado = 'Vencido' and extract(year from fecha_vencimeinto) = extract(year from current_date)\n" +
-            "                group by\n" +
-            "                    mes\n" +
-            "            ) as temporal\n" +
-            "    );\n", nativeQuery = true)
-    List<Object[]> MesMayorDeuda( @Param("condominio")int condominio);
+    @Query(value = "\n" +
+            "SELECT\n" +
+            "    MAX(mes) AS mes,\n" +
+            "    MAX(sumatotalmes) AS max_sumatotalmes\n" +
+            "FROM (\n" +
+            "    SELECT\n" +
+            "        TO_CHAR(fecha_vencimeinto, 'Month') AS mes,\n" +
+            "        SUM(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END) AS sumatotalmes\n" +
+            "    FROM (\n" +
+            "        SELECT\n" +
+            "            dp.id_documento_pago,\n" +
+            "            dp.id_receptor,\n" +
+            "            dp.fecha_emision,\n" +
+            "            dp.fecha_vencimeinto, \n" +
+            "            dp.moneda,\n" +
+            "            SUM(de.subtotal_detalle) AS total,\n" +
+            "            dp.estado,\n" +
+            "            o.id_usuario,\n" +
+            "            dp.id_tipo_doc_pago,\n" +
+            "            u.nombre_usuario AS nombre_usuario_receptor,\n" +
+            "            o.nombre_usuario AS nombre_usuario_emisor\n" +
+            "        FROM\n" +
+            "            documento_pago dp\n" +
+            "        INNER JOIN\n" +
+            "            usuario u ON dp.id_receptor = u.id_usuario\n" +
+            "        INNER JOIN\n" +
+            "            detalle de ON dp.id_documento_pago = de.id_documento_pago\n" +
+            "        INNER JOIN\n" +
+            "            usuario o ON dp.id_usuario = o.id_usuario\n" +
+            "        WHERE\n" +
+            "            o.nombre_usuario = :nombreusuario\n" +
+            "        GROUP BY\n" +
+            "            dp.id_documento_pago, dp.fecha_emision, dp.fecha_vencimeinto,  \n" +
+            "            dp.moneda, dp.estado, o.id_usuario, dp.id_tipo_doc_pago, u.nombre_usuario, o.nombre_usuario\n" +
+            "    ) temps\n" +
+            "    WHERE\n" +
+            "        estado = 'Vencido' AND EXTRACT(YEAR FROM fecha_vencimeinto) = EXTRACT(YEAR FROM CURRENT_DATE)\n" +
+            "    GROUP BY\n" +
+            "        mes\n" +
+            ")temporal;\n", nativeQuery = true)
+    List<Object[]> MesMayorDeuda( @Param("nombreusuario") String nombreusuario);
 
 
     @Query(value = "SELECT\n" +

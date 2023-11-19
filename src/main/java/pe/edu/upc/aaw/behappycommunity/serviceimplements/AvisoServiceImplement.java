@@ -29,8 +29,8 @@ public class AvisoServiceImplement implements IAvisoService {
     }
 
     @Override
-    public List<String[]> quantityAnnouncementPerMonth(int anio) {
-        return aR.quantityAnnouncementPerMonth(anio);
+    public List<String[]> quantityAnnouncementPerMonth(int condomino) {
+        return aR.quantityAnnouncementPerMonth(condomino);
     }
     @Override
     public Aviso listarId(int idAviso) {

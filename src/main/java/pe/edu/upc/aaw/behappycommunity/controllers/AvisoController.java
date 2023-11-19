@@ -47,9 +47,9 @@ public class AvisoController {
         aS.insert(a);
     }
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/reporte2/{anio}")
-    public List<Reporte2DTO>VisualizarCantidadAvisosPorMes(@PathVariable("anio") int anio){
-        List<String[]>lista=aS.quantityAnnouncementPerMonth(anio);
+    @GetMapping("/reporte2/{condomino}")
+    public List<Reporte2DTO>VisualizarCantidadAvisosPorMes(@PathVariable("condomino") int condomino){
+        List<String[]>lista=aS.quantityAnnouncementPerMonth(condomino);
         List<Reporte2DTO>listaDTO= new ArrayList<>();
         for(String[] data:lista){
             Reporte2DTO dto=new Reporte2DTO();
