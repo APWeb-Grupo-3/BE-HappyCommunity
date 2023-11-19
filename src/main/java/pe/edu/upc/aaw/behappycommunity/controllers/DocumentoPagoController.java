@@ -74,9 +74,9 @@ public class DocumentoPagoController {
     }
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    @GetMapping("/MesDeuda/{condominio}")
-    public List<MesDeudaReDTO>DeudaMes(@PathVariable("condominio") int condominio){
-        List<Object[]>lista=dS.DeudaMes(condominio);
+    @GetMapping("/MesDeuda/{nombreusuario}")
+    public List<MesDeudaReDTO>DeudaMes(@PathVariable("nombreusuario") String nombreusuario){
+        List<Object[]>lista=dS.DeudaMes(nombreusuario);
         List<MesDeudaReDTO>listaDTO=new ArrayList<>();
         for(Object[] data:lista){
             MesDeudaReDTO dto=new MesDeudaReDTO();

@@ -85,30 +85,36 @@ public interface IDocumentoPagoRepository extends JpaRepository<DocumentoPago,In
             "    SUM(CASE WHEN moneda = 'Dolares' THEN total * 3.7 ELSE total END) AS sumames\n" +
             "FROM (\n" +
             "    SELECT\n" +
-            "        c.id_condominio,\n" +
-            "        s.id_solicitud_acceso,\n" +
-            "        u.id_usuario,\n" +
-            "        d.id_documento_pago,\n" +
-            "        d.fecha_vencimeinto,\n" +
-            "        d.total,\n" +
-            "        d.estado,\n" +
-            "        d.moneda\n" +
+            "        dp.id_documento_pago,\n" +
+            "        dp.id_receptor,\n" +
+            "        dp.fecha_emision,\n" +
+            "        dp.fecha_vencimeinto, \n" +
+            "        dp.moneda,\n" +
+            "        SUM(de.subtotal_detalle) AS total,\n" +
+            "        dp.estado,\n" +
+            "        o.id_usuario,\n" +
+            "        dp.id_tipo_doc_pago,\n" +
+            "        u.nombre_usuario AS nombre_usuario_receptor,\n" +
+            "        o.nombre_usuario AS nombre_usuario_emisor\n" +
             "    FROM\n" +
-            "        condominio c\n" +
+            "        documento_pago dp\n" +
             "    INNER JOIN\n" +
-            "        solicitud_acceso s ON c.id_condominio = s.id_condominio\n" +
+            "        usuario u ON dp.id_receptor = u.id_usuario\n" +
             "    INNER JOIN\n" +
-            "        usuario u ON s.id_usuario = u.id_usuario\n" +
-            "    INNER JOIN \n" +
-            "        documento_pago d ON u.id_usuario = d.id_receptor\n" +
-            "    WHERE\n" +
-            "        c.id_condominio = :condominio\n" +
-            ") AS tempo\n" +
+            "        detalle de ON dp.id_documento_pago = de.id_documento_pago\n" +
+            "    INNER JOIN\n" +
+            "        usuario o ON dp.id_usuario = o.id_usuario\n" +
+            "\twhere o.nombre_usuario = :nombreusuario\n" +
+            "    GROUP BY\n" +
+            "        dp.id_documento_pago, dp.fecha_emision, dp.fecha_vencimeinto,  \n" +
+            "        dp.moneda, dp.estado, o.id_usuario, dp.id_tipo_doc_pago, u.nombre_usuario, o.nombre_usuario\n" +
+            ") temps\n" +
             "WHERE\n" +
             "    estado = 'Vencido' AND EXTRACT(YEAR FROM fecha_vencimeinto) = EXTRACT(YEAR FROM CURRENT_DATE)\n" +
             "GROUP BY\n" +
-            "    mes;", nativeQuery = true)
-    List<Object[]>DeudaMes( @Param("condominio")int condominio);
+            "    mes;\n" +
+            "\n", nativeQuery = true)
+    List<Object[]>DeudaMes( @Param("nombreusuario") String nombreusuario);
 
 
 

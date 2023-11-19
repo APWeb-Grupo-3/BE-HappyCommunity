@@ -35,8 +35,8 @@ public class DocumentoPagoServiceImplement implements IDocumentoPagoService {
     }
 
     @Override
-    public List<Object[]> DeudaMes( int condomino) {
-        return dR.DeudaMes( condomino);
+    public List<Object[]> DeudaMes( String nombreusuario) {
+        return dR.DeudaMes( nombreusuario);
     }
 
 
