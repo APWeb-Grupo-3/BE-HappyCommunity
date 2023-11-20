@@ -1,6 +1,5 @@
 package pe.edu.upc.aaw.behappycommunity.repositories;
 
-import org.hibernate.annotations.Parent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -59,18 +58,33 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
             " )",nativeQuery = true)
     public List<String[]> findVecinosWithoutDebt(@Param("administrador")String administrador);
 
-    @Query(value ="SELECT apellidos, nombres, CASE\n" +
-            " WHEN estado = 'Deuda' THEN 'Vecino con deuda'\n" +
-            " END AS \"Estado\" FROM\n" +
-            " (\n" +
-            " SELECT DISTINCT u.id_usuario,u.apellidos,\n" +
-            " u.nombres,dp.estado\n" +
-            " FROM documento_pago dp\n" +
-            " INNER JOIN usuario u\n" +
-            " ON dp.id_receptor = u.id_usuario\n" +
-            " WHERE dp.estado = 'Deuda'\n" +
-            " ) AS Tabla ", nativeQuery = true)
-    public List<String[]>findVecinosWithDebt();
+    @Query(value="SELECT   distinct(m.id_usuario),\n" +
+            "            m.apellidos,\n" +
+            "            m.nombres,\n" +
+            "             m.nombre_usuario\n" +
+            "           FROM\n" +
+            "             (\n" +
+            "              SELECT \n" +
+            "                 u.*\n" +
+            "               FROM \n" +
+            "                 usuario u\n" +
+            "                 INNER JOIN solicitud_acceso sa ON u.id_usuario = sa.id_usuario\n" +
+            "                 INNER JOIN condominio c ON c.id_condominio = sa.id_condominio\n" +
+            "               WHERE \n" +
+            "                 sa.estado = 'Aprobado'\n" +
+            "                 AND c.administrador = administrador\n" +
+            "             ) AS m\n" +
+            "           inner join documento_pago dp\n" +
+            "           on dp.id_receptor=m.id_usuario\n" +
+            "           where m.id_usuario not in (\n" +
+            "           SELECT\n" +
+            "                 dp.id_receptor\n" +
+            "               FROM\n" +
+            "                 documento_pago dp\n" +
+            "               WHERE\n" +
+            "                 dp.estado = 'Pagado'\n" +
+            "           )",nativeQuery = true)
+    public List<String[]>findVecinosWithDebt(@Param("administrador")String administrador);
 
     @Query(value = "select * \n" +
             " from usuario\n" +

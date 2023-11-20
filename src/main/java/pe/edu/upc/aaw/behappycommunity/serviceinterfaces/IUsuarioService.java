@@ -15,7 +15,7 @@ public interface IUsuarioService {
 
     public List<String[]>findVecinosWithoutDebt(String administrador);
 
-    public List<String[]>findVecinosWithDebt();
+    public List<String[]>findVecinosWithDebt(String administrador);
     public List<Usuario> findUser(String nombre_usuario);
     public List<Usuario>findUsersC(Long id_condominio);
 
